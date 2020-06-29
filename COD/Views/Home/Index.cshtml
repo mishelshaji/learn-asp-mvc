@@ -1,0 +1,37 @@
+﻿@model IEnumerable<COD.Models.Course>
+@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="container">
+        <h1 class="text-center text-info">Courses</h1>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped">
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.FirstOrDefault().Name)</td>
+                    <td>Author</td>
+                    <td>Cost</td>
+                    <td>Duration</td>
+                    <td>About</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                @foreach (var c in Model)
+                {
+            <tr>
+                <td>@c.Name</td>
+                <td>@c.Author</td>
+                <td>@c.Cost</td>
+                <td>@c.Duration</td>
+                <td>@c.About</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = @c.Id })</td>
+                <td onclick="return confirm('Do you want to delete this?);">@Html.ActionLink("Delete", "Delete", new { id = @c.Id })</td>
+            </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <h2 class="text-center text-warning">No data found</h2>
+        }
+    </div>
